@@ -1,0 +1,30 @@
+@import './GovernmentDashboard.css';
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-badge.flagged {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.flagged-label {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.read-more {
+  color: #3b82f6;
+  cursor: pointer;
+  margin-left: 6px;
+  font-weight: 500;
+}

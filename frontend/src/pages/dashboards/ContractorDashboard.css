@@ -1,0 +1,33 @@
+@import './GovernmentDashboard.css';
+
+.milestones-table-container {
+  overflow-x: auto;
+  padding: 0;
+}
+
+.milestones-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.milestones-table th {
+  text-align: left;
+  padding: 12px;
+  background: var(--light-bg);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.milestones-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.milestone-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}

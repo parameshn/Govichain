@@ -1,0 +1,23 @@
+/* Reuse most styles from Login.css */
+@import './Login.css';
+
+.auth-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.auth-form select:focus {
+  outline: none;
+  border-color: var(--secondary-blue);
+}
+
+/* Make register card slightly taller */
+.auth-card {
+  max-width: 560px;
+}
