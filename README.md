@@ -629,10 +629,8 @@ Shows confidence score → Auditor sees recommendations → Makes final decision
 
 ---
 
-# 👨‍💻 Author
+# 👨‍💻 Authors
 
-**Daivik S M**
-Full Stack Developer | Computer Science Engineer
-
+**Daivik S M | Paramesh N | Darshith C | Tanush C**
 ---
 
