@@ -1,0 +1,377 @@
+\documentclass[border=12pt]{standalone}
+
+\usepackage{pgf-umlsd}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{sfmath}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% =========================================================
+% COLORS
+% =========================================================
+
+\definecolor{cGov}{HTML}{C026D3}
+\definecolor{cContractor}{HTML}{0D9488}
+\definecolor{cBackend}{HTML}{0891B2}
+\definecolor{cAI}{HTML}{EA580C}
+\definecolor{cContract}{HTML}{0891B2}
+\definecolor{cChain}{HTML}{16A34A}
+\definecolor{cDB}{HTML}{7C3AED}
+\definecolor{cAuditor}{HTML}{DC2626}
+
+% =========================================================
+% INSTANCE BOX STYLE
+% =========================================================
+
+\newcommand{\setinstcolor}[1]{%
+  \tikzstyle{inststyle}=[
+    rectangle,
+    draw=#1,
+    ultra thick,
+    rounded corners=3pt,
+    anchor=west,
+    minimum height=0.85cm,
+    minimum width=2.1cm,
+    fill=#1!8,
+    font=\bfseries\sffamily\small,
+    text=#1!65!black
+  ]%
+}
+
+% =========================================================
+% COLORED MESSAGE
+% =========================================================
+
+\newenvironment{cmess}[1]{%
+  \begingroup
+  \tikzset{
+    every path/.append style={
+      draw=#1,
+      line width=0.9pt
+    },
+    every node/.append style={
+      text=#1!60!black
+    }
+  }%
+}{%
+  \endgroup
+}
+
+% =========================================================
+% DOCUMENT
+% =========================================================
+
+\begin{document}
+
+\begin{sequencediagram}
+
+% =========================================================
+% PARTICIPANTS
+% =========================================================
+
+\setinstcolor{cGov}
+\newinst{gov}{Government Officer}
+
+\setinstcolor{cContractor}
+\newinst[1.4]{contractor}{Contractor}
+
+\setinstcolor{cBackend}
+\newinst[1.4]{backend}{FastAPI Backend}
+
+\setinstcolor{cAI}
+\newinst[1.4]{ai}{AI Compliance Engine}
+
+\setinstcolor{cContract}
+\newinst[1.4]{contract}{Smart Contract}
+
+\setinstcolor{cChain}
+\newinst[1.4]{chain}{Blockchain Network}
+
+\setinstcolor{cDB}
+\newinst[1.4]{db}{PostgreSQL DB}
+
+\setinstcolor{cAuditor}
+\newinst[1.4]{auditor}{Auditor}
+
+
+% =========================================================
+% PHASE 1
+% AUTHENTICATION AND RBAC
+% =========================================================
+
+\begin{sdblock}[cGov!20]{1. Authentication and RBAC}{}
+
+  % 1
+  \begin{cmess}{cGov}
+    \mess
+      {gov}
+      {1: Login Request JWT}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 2
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {2: Validate Credentials and Role}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 3
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {3: Authenticated Access}
+      {gov}
+    \postlevel
+  \end{cmess}
+
+\end{sdblock}
+
+
+% =========================================================
+% PHASE 2
+% PROJECT CREATION AND AI COMPLIANCE
+% =========================================================
+
+\begin{sdblock}[cAI!20]{2. Project Creation and AI Compliance}{}
+
+  % 4
+  \begin{cmess}{cGov}
+    \mess
+      {gov}
+      {4: Create Project}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 5
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {5: Store Project Data}
+      {db}
+    \postlevel
+  \end{cmess}
+
+  % 6
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {6: Request Compliance Rules}
+      {ai}
+    \postlevel
+  \end{cmess}
+
+  % 7
+  \begin{cmess}{cAI}
+    \mess
+      {ai}
+      {7: Generate Compliance Rules}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 8
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {8: Store Compliance Rules}
+      {db}
+    \postlevel
+  \end{cmess}
+
+  % 9
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {9: Record Project On Chain Optional}
+      {contract}
+    \postlevel
+  \end{cmess}
+
+  % 10
+  \begin{cmess}{cContract}
+    \mess
+      {contract}
+      {10: Register Project and Escrow}
+      {chain}
+    \postlevel
+  \end{cmess}
+
+  % 11
+  \begin{cmess}{cChain}
+    \mess
+      {chain}
+      {11: Transaction Hash}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+\end{sdblock}
+
+
+% =========================================================
+% PHASE 3
+% MILESTONE SUBMISSION AND AI EVALUATION
+% =========================================================
+
+\begin{sdblock}[cContractor!20]
+{3. Milestone Submission and AI Evaluation}{}
+
+  % 12
+  \begin{cmess}{cContractor}
+    \mess
+      {contractor}
+      {12: Submit Milestone and Funding Request}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 13
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {13: Store Milestone}
+      {db}
+    \postlevel
+  \end{cmess}
+
+  % 14
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {14: Evaluate Milestone}
+      {ai}
+    \postlevel
+  \end{cmess}
+
+  % 15
+  \begin{cmess}{cAI}
+    \mess
+      {ai}
+      {15: Score Flags and Recommendation}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 16
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {16: Save AI Report}
+      {db}
+    \postlevel
+  \end{cmess}
+
+  % 17
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {17: Milestone and AI Recommendation}
+      {auditor}
+    \postlevel
+  \end{cmess}
+
+\end{sdblock}
+
+
+% =========================================================
+% PHASE 4
+% AUDITOR REVIEW AND FUND RELEASE
+% =========================================================
+
+\begin{sdblock}[cAuditor!20]
+{4. Auditor Review and Fund Release}{}
+
+  % 18
+  \begin{cmess}{cAuditor}
+    \mess
+      {auditor}
+      {18: Approve Flag or Reject}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+  % 19
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {19: Update Milestone Status}
+      {db}
+    \postlevel
+  \end{cmess}
+
+  % 20
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {20: Release Funds Optional On Chain}
+      {contract}
+    \postlevel
+  \end{cmess}
+
+  % 21
+  \begin{cmess}{cContract}
+    \mess
+      {contract}
+      {21: Fund Release Transaction}
+      {chain}
+    \postlevel
+  \end{cmess}
+
+  % 22
+  \begin{cmess}{cChain}
+    \mess
+      {chain}
+      {22: Immutable Ledger Entry}
+      {backend}
+    \postlevel
+  \end{cmess}
+
+\end{sdblock}
+
+
+% =========================================================
+% PHASE 5
+% DASHBOARDS AND TRANSPARENCY
+% =========================================================
+
+\begin{sdblock}[cChain!20]
+{5. Dashboards and Transparency}{}
+
+  % 23
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {23: Government Dashboard Statistics}
+      {gov}
+    \postlevel
+  \end{cmess}
+
+  % 24
+  \begin{cmess}{cBackend}
+    \mess
+      {backend}
+      {24: Milestone Status and AI Report}
+      {contractor}
+    \postlevel
+  \end{cmess}
+
+  % 25
+  \begin{cmess}{cChain}
+    \mess
+      {chain}
+      {25: Transaction Hash and Explorer Link}
+      {auditor}
+    \postlevel
+  \end{cmess}
+
+\end{sdblock}
+
+\end{sequencediagram}
+
+\end{document}
