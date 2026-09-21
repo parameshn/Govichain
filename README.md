@@ -22,6 +22,14 @@ The system enforces **JWT authentication**, **RBAC (Role-Based Access Control)**
 
 ---
 
+## 🎥 Demo
+
+Watch the GoviChain project demonstration:
+
+[▶️ Watch GoviChain Demo](https://github.com/user-attachments/assets/f51a9fae-28f8-4b65-b921-257b1daeee7d)
+
+---
+
 ## 🏗️ Tech Stack
 
 ### 🔹 Backend
